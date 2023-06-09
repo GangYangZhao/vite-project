@@ -1,0 +1,33 @@
+---
+root: true
+# 继承另外一份 eslint 配置，可以是一个字符串，也可以配置成一个字符串数组
+# 1、eslint 本身继承
+# 2、类似 eslint-config-xxx 的 npm 包继承
+# 3、eslint 插件继承
+extends:
+  - 'eslint:recommended'
+  - 'plugin:@typescript-eslint/recommended'
+  - 'plugin:react-hooks/recommended'
+# 运行环境
+env:
+  browser: true
+  node: true
+  es2022: true
+# parser 解析器：ESLint 底层默认使用 Espree 来进行 AST 解析。但不支持 Typescript 需要引入其他解析器
+parser: '@typescript-eslint/parser'
+# parserOptions 解析器选项：这个配置可以对上述解析器进行能力定制
+parserOptions:
+  # 这个配置和 Acron 的 ecmaVersion 是兼容的，可以配置 es + 数字 也可以直接配置 latest，启用最新语法
+  ecmaVersions: 'latest'
+  # 默认为 script，如果使用 ES Module 则应设置为 module
+  sourceType: 'module'
+  # 表示一个对象，表示想使用的额外语言特性，如开启 jsx
+  ecmaFeatures:
+    jsx: true
+# 可以通过 eslint 插件来扩展规则集，但是 eslint 默认并没有开启这些规则的校验，需要在 rules 中开启
+plugins:
+  - 'react-refresh'
+# 具体规则代码： off/0 关闭规则 ｜ warn/1 开启规则，抛出 waring ｜ error/2 抛出 error
+rules:
+  'react-refresh/only-export-components': 'warn'
+  'no-unused-vars': 'error'
